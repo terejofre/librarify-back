@@ -54,7 +54,6 @@ class CreateUserCommand extends Command
         }
 
         $user = new User(
-            Uuid::uuid4(),
             $email
         );
         $password = $this->userPasswordHasher->hashPassword($user, $plainPassword);

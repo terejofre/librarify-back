@@ -21,22 +21,20 @@ services:
             args:
                 TIMEZONE: ${TIMEZONE}
         volumes:
-            - librarifyback_app_sync:/var/www/librarify/
+            - ..:/var/www/librarify/
         networks:
             - symfony
     nginx:
         build:
             context: ./nginx
         volumes:
-            - librarifyback_app_sync:/var/www/librarify/
+            - ..:/var/www/librarify/
         ports:
             - 80:80
         networks:
             - symfony
 
 volumes:
-    librarifyback_app_sync:
-        external: true
     db_librarify:
 
 networks:

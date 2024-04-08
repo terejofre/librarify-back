@@ -2,23 +2,37 @@
 
 namespace App\Entity;
 
-use Ramsey\Uuid\UuidInterface;
+use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
+    private readonly int $id;
     private array $roles = [];
     private string $password;
 
+    private \DateTimeInterface $createdAt;
+
     public function __construct(
-        private UuidInterface $id,
-        private string $email
+        private string       $email,
+        private ?bool $enabled = true,
+        private ?Collection  $comments = new ArrayCollection()
     ) {
+        $this->createdAt = new DateTimeImmutable();
     }
 
-    public function getId(): UuidInterface
+    /**
+     * @return ?int
+     */
+    public function getId(): ?int
     {
-        return $this->id;
+        if (isset($this->id)) {
+            return $this->id;
+        }
+
+        return null;
     }
 
     public function getEmail(): string
@@ -48,6 +62,8 @@ class User implements UserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
+        $roles[] = 'ROLE_SUPER_ADMIN';
 
         return array_unique($roles);
     }
@@ -69,6 +85,19 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getEnabled()
+    {
+        return true;
+    }
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getCreatedAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
     }
 
     /**

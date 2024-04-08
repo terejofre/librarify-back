@@ -32,6 +32,7 @@ class Book
         private ?DateTimeInterface $readAt = null,
         private ?Collection $authors = new ArrayCollection(),
         private ?Collection $categories = new ArrayCollection(),
+        private ?Collection $comments = new ArrayCollection()
     ) {
         $this->createdAt = new DateTimeImmutable();
     }
@@ -49,7 +50,8 @@ class Book
         ?Score $score,
         ?DateTimeInterface $readAt,
         array $authors,
-        array $categories
+        array $categories,
+        array $comments
     ): self {
         $book = new self(
             Uuid::uuid4(),
@@ -60,7 +62,8 @@ class Book
             $score ?? new Score(),
             $readAt,
             new ArrayCollection($authors),
-            new ArrayCollection($categories)
+            new ArrayCollection($categories),
+            new ArrayCollection($comments)
         );
         $book->addDomainEvent(new BookCreatedEvent($book->getId()));
         return $book;
@@ -102,6 +105,33 @@ class Book
     {
         $this->image = $image;
 
+        return $this;
+    }
+
+    /**
+     * @return Comment[]
+     */
+    public function getComments(): array
+    {
+        return array_values($this->comments->toArray());
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        $this->comments[] = $comment;
+        return $this;
+    }
+
+    public function updateComments(Comment ...$newComments)
+    {
+        foreach ($newComments as $newComment) {
+            $this->addComment($newComment);
+        }
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        $this->comments->removeElement($comment);
         return $this;
     }
 
@@ -215,7 +245,8 @@ class Book
         ?Score $score,
         ?DateTimeInterface $readAt,
         array $authors,
-        array $categories
+        array $categories,
+        array $comments
     ) {
         $this->title = $title;
         if ($image !== null) {
@@ -226,6 +257,7 @@ class Book
         $this->readAt = $readAt;
         $this->updateCategories(...$categories);
         $this->updateAuthors(...$authors);
+        $this->updateComments(...$comments);
     }
 
     public function patch(array $data): self
@@ -240,6 +272,16 @@ class Book
             }
             $this->title = $title;
         }
+
+        if (\array_key_exists('comment', $data)) {
+            $comment = $data['comment'];
+            if ($comment === null) {
+                throw new DomainException('Comment cannot be null');
+            }
+            $commentEntity = Comment::create($comment, $this);
+
+        }
+
         return $this;
     }
 
@@ -259,9 +301,25 @@ class Book
         return $this->description;
     }
 
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
     public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param DateTimeInterface $createdAt
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     public function isRead(): ?bool
@@ -278,6 +336,14 @@ class Book
     public function getReadAt(): ?DateTimeInterface
     {
         return $this->readAt;
+    }
+
+    /**
+     * @param DateTimeInterface|null $readAt
+     */
+    public function setReadAt(?DateTimeInterface $readAt): void
+    {
+        $this->readAt = $readAt;
     }
 
     public function getReadAtAsString(): ?string
@@ -298,6 +364,10 @@ class Book
     {
         return $this->user;
     }
+
+    /**
+     * @param Comment|null $comment
+     */
 
     public function __toString()
     {

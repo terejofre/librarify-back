@@ -34,6 +34,7 @@ services:
         public: true
         calls:
             - [setUserRepository, ['@App\Repository\UserRepository']]
+            - [setTemplate, ['show', '/admin/book/show.html.twig']]
 
     admin.author:
         class: App\Admin\AuthorAdmin
@@ -73,3 +74,10 @@ services:
     App\Service\Book\ExportInCsv:
         arguments:
             $projectFolder: '%kernel.project_dir%'
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, App\Controller\UserAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: User }
+        public: true

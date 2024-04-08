@@ -15,6 +15,7 @@ class BookDto
     public ?array $categories = [];
     /** @var \App\Form\Model\AuthorDto[]|null */
     public ?array $authors = [];
+    public ?array $comments = [];
     public ?DateTimeInterface $readAt = null;
 
     public function __construct()

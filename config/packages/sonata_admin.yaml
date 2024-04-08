@@ -1,5 +1,10 @@
 sonata_admin:
     title: 'Librarify Admin'
+    templates:
+        layout: '/admin/layout.html.twig'
+    security:
+        handler: sonata.admin.security.handler.role
+        role_admin: ROLE_ADMIN
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }

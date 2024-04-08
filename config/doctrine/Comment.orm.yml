@@ -1,0 +1,31 @@
+App\Entity\Comment:
+  type: entity
+  table: comment
+  repositoryClass: App\Repository\CommentRepository
+  id:
+    id:
+      type: uuid
+  fields:
+    comment:
+      type: text
+      unique: false
+      nullable: false
+      precision: 0
+    createdAt:
+      type: datetime
+      nullable: false
+  manyToOne:
+    user:
+      targetEntity: App\Entity\User
+      inversedBy: comments
+      cascade: { }
+      fetch: LAZY
+      joinColumn:
+        nullable: false
+    book:
+      targetEntity: App\Entity\Book
+      inversedBy: comments
+      cascade: {  }
+      fetch: LAZY
+      joinColumn:
+        nullable: false

@@ -30,6 +30,7 @@ class PostBookControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $this->sendRequest($client, ['title' => '']);
+        var_dump($client->getResponse());
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
     }
 

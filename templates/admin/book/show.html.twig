@@ -1,0 +1,43 @@
+{% extends '@SonataAdmin/CRUD/base_show.html.twig' %}
+
+
+{% block sonata_page_content %}
+    {{  parent() }}
+    <div class="container">
+        <form action="{{ path('app_api_books_patch', {id: object.getId}) }}" id="comment-form">
+            <div class="row">
+                <div class="mb-3">
+                    <textarea id="book_comment" class="form-control" rows="8"></textarea>
+                </div>
+                <div class="mb-3">
+                    <input type="button" class="btn btn-primary btn-publish" style="margin-left: 15px;" value="Publicar">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('.btn-publish').on('click', function() {
+                var $form = $('#comment-form').serializeArray();
+                $.ajax({
+                    url: $('#comment-form').data('action'),
+                    data: JSON.stringify($form),
+                    success: function(data) {
+                        console.log('successs!');
+                    },
+                    error: function(jqHRC) {
+                        console.log('error');
+                    }
+                })
+            });
+        });
+
+    </script>
+{% endblock %}
+
+
+
