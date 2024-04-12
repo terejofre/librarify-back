@@ -117,10 +117,10 @@ final class BookAdmin extends AbstractAdmin
                 ->add('readAt')
                 ->add('score.value')
             ->end()
-            ->with('Comentarios', ['class' => 'col-md-9'])
+            /*->with('Comentarios', ['class' => 'col-md-9'])
                 ->add('comments', FieldDescriptionInterface::TYPE_TEXTAREA, [
                     'editable' => true
-                ])
+                ])*/
             ->end();
     }
 }

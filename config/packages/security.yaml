@@ -1,5 +1,4 @@
 security:
-
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -8,13 +7,14 @@ security:
         ROLE_ADMIN: [ ROLE_USER, ROLE_SONATA_ADMIN ]
         ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
+
     password_hashers:
         Sonata\UserBundle\Model\UserInterface: auto
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        sonata_user_bundle:
+        app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
@@ -27,17 +27,19 @@ security:
         admin:
             lazy: true
             pattern: /admin(.*)
-            provider: sonata_user_bundle
+            provider: app_user_provider
             context: user
             anonymous: true
             form_login:
-                login_path: sonata_user_admin_security_login
-                check_path: sonata_user_admin_security_check
+                provider: app_user_provider
+                username_parameter: email
+                login_path: app_login
+                check_path: app_login
                 enable_csrf: false
-                default_target_path: sonata_admin_dashboard
+                failure_path: null
             logout:
-                path: sonata_user_admin_security_logout
-                target: sonata_user_admin_security_login
+                path: app_logout
+                target: app_login
             remember_me:
                 secret: '%env(APP_SECRET)%'
                 lifetime: 2629746
@@ -85,5 +87,5 @@ security:
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [PUBLIC_ACCESS, ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/admin/, role: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/.*, role: PUBLIC_ACCESS }

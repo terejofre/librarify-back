@@ -1,0 +1,7 @@
+services:
+
+  App\Repository\BookRepository:
+    public: true
+
+  App\Service\Utils\Security:
+    public: true

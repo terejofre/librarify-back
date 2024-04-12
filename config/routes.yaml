@@ -4,11 +4,3 @@ api_login_check:
 gesdinet_jwt_refresh_token:
     path:       /api/token/refresh
     controller: gesdinet.jwtrefreshtoken::refresh
-
-sonata_user_admin_security:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /admin
-
-sonata_user_admin_resetting:
-    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
-    prefix: /admin

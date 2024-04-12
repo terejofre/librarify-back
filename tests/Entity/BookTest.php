@@ -7,6 +7,7 @@ use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\User;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Monolog\Test\TestCase;
 
 /**
@@ -65,5 +66,19 @@ class BookTest extends TestCase
     {
         $this->book->removeComment($this->commentMock);
         $this->assertCount(0, $this->book->getComments());
+    }
+
+    public function testPatchBookInformationWithCommentSuccessfully()
+    {
+        $anotherUserMock = $this->createMock(User::class);
+        $this->book->patch(['comment' => 'Un libro hermoso', 'user' => $anotherUserMock]);
+        $this->assertCount(2, $this->book->getComments());
+    }
+
+    public function testPatchBookInformationWithCommentWithBadUser()
+    {
+        $this->expectException(\DomainException::class);
+        $this->book->patch(['comment' => 'Un libro hermoso', 'user' => 'user name string']);
+        $this->assertCount(2, $this->book->getComments());
     }
 }

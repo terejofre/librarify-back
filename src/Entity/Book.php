@@ -273,13 +273,17 @@ class Book
             $this->title = $title;
         }
 
-        if (\array_key_exists('comment', $data)) {
+        if (\array_key_exists('comment', $data) && \array_key_exists('user', $data) ) {
             $comment = $data['comment'];
             if ($comment === null) {
                 throw new DomainException('Comment cannot be null');
             }
-            $commentEntity = Comment::create($comment, $this);
 
+            $user = $data['user'];
+            if ( !is_object($user) || !get_class($user) == User::class ) {
+                throw new DomainException('User must be an Entity');
+            }
+            $this->addComment(Comment::create($comment, $this, $user));
         }
 
         return $this;
