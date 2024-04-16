@@ -11,9 +11,9 @@ class BookDto
     public ?string $description = null;
     public ?int $score = null;
     public ?string $base64Image = null;
-    /** @var \App\Form\Model\CategoryDto[]|null */
+    /** @var \App\Event\Form\Model\CategoryDto[]|null */
     public ?array $categories = [];
-    /** @var \App\Form\Model\AuthorDto[]|null */
+    /** @var \App\Event\Form\Model\AuthorDto[]|null */
     public ?array $authors = [];
     public ?array $comments = [];
     public ?DateTimeInterface $readAt = null;

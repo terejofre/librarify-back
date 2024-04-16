@@ -2,7 +2,7 @@
 
 namespace App\Form\Type;
 
-use App\Form\Model\AuthorDto;
+use App\Event\Form\Model\AuthorDto;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;

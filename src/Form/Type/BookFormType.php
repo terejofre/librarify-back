@@ -2,7 +2,9 @@
 
 namespace App\Form\Type;
 
-use App\Form\Model\BookDto;
+use App\Event\Form\Type\AuthorFormType;
+use App\Event\Form\Model\BookDto;
+use App\Event\Form\Type\CategoryFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;

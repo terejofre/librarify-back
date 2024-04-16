@@ -3,8 +3,8 @@
 namespace App\Service\Author;
 
 use App\Entity\Author;
-use App\Form\Model\AuthorDto;
-use App\Form\Type\AuthorFormType;
+use App\Event\Form\Model\AuthorDto;
+use App\Event\Form\Type\AuthorFormType;
 use App\Repository\AuthorRepository;
 use App\Service\Utils\Security;
 use Symfony\Component\Form\FormFactoryInterface;

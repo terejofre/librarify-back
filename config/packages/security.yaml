@@ -14,10 +14,9 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        app_user_provider:
-            entity:
-                class: App\Entity\User
-                property: email
+        sonata_user_provider:
+            id: sonata.user.security.user_provider
+
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
@@ -27,19 +26,17 @@ security:
         admin:
             lazy: true
             pattern: /admin(.*)
-            provider: app_user_provider
+            provider: sonata_user_provider
             context: user
             anonymous: true
             form_login:
-                provider: app_user_provider
-                username_parameter: email
-                login_path: app_login
-                check_path: app_login
+                login_path: sonata_user_admin_security_login
+                check_path: sonata_user_admin_security_check
                 enable_csrf: false
-                failure_path: null
+                default_target_path: sonata_admin_dashboard
             logout:
-                path: app_logout
-                target: app_login
+                path: sonata_user_admin_security_logout
+                target: sonata_user_admin_security_login
             remember_me:
                 secret: '%env(APP_SECRET)%'
                 lifetime: 2629746

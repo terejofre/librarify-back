@@ -44,6 +44,13 @@ services:
         calls:
             - [setUserRepository, ['@App\Repository\UserRepository']]
 
+    sonata.user.admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [ '@sonata.user.manager.user' ]
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, group: admin, label: User }
+        public: true
+
     App\EventListener\JWTCreatedListener:
         arguments: ['@request_stack']
         tags:
@@ -74,10 +81,3 @@ services:
     App\Service\Book\ExportInCsv:
         arguments:
             $projectFolder: '%kernel.project_dir%'
-
-    admin.user:
-        class: App\Admin\UserAdmin
-        arguments: [~, App\Entity\User, App\Controller\UserAdminController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: User }
-        public: true

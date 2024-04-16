@@ -3,8 +3,8 @@
 namespace App\Service\Category;
 
 use App\Entity\Category;
-use App\Form\Model\CategoryDto;
-use App\Form\Type\CategoryFormType;
+use App\Event\Form\Model\CategoryDto;
+use App\Event\Form\Type\CategoryFormType;
 use App\Repository\CategoryRepository;
 use App\Service\Utils\Security;
 use Symfony\Component\Form\FormFactoryInterface;

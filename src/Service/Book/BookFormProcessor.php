@@ -4,9 +4,9 @@ namespace App\Service\Book;
 
 use App\Entity\Book;
 use App\Entity\Book\Score;
-use App\Form\Model\BookDto;
-use App\Form\Model\CategoryDto;
-use App\Form\Type\BookFormType;
+use App\Event\Form\Model\BookDto;
+use App\Event\Form\Model\CategoryDto;
+use App\Event\Form\Type\BookFormType;
 use App\Repository\BookRepository;
 use App\Service\Author\CreateAuthor;
 use App\Service\Author\GetAuthor;

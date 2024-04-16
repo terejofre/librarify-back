@@ -7,27 +7,6 @@ App\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
-    fields:
-        email:
-            type: string
-            scale: 0
-            length: 512
-            unique: true
-            nullable: false
-            precision: 0
-        password:
-            type: string
-            scale: 0
-            length: 512
-            unique: false
-            nullable: false
-            precision: 0
-        enabled:
-            type: boolean
-            nullable: false
-        createdAt:
-            type: datetime
-            nullable: false
     oneToMany:
         comments:
             targetEntity: App\Entity\Comment
