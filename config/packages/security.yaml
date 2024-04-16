@@ -4,8 +4,15 @@ security:
             algorithm: auto
 
     role_hierarchy:
-        ROLE_ADMIN: [ ROLE_USER, ROLE_SONATA_ADMIN ]
-        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+        ROLE_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_SUPER_ADMIN
+
+        ROLE_MEMBER:
+            - ROLE_ADMIN_AUTHOR_ALL
+            - ROLE_ADMIN_CATEGORY_ALL
+            - ROLE_ADMIN_BOOK_ALL
 
 
     password_hashers:
@@ -84,5 +91,6 @@ security:
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/, role: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/admin/author, role: [PUBLIC_ACCESS] }
+        - { path: ^/admin, role: [PUBLIC_ACCESS] }
         - { path: ^/.*, role: PUBLIC_ACCESS }

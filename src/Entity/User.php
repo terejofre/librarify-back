@@ -16,12 +16,4 @@ class User extends BaseUser
     ) {
         $this->createdAt = new DateTimeImmutable();
     }
-
-    public function getRoles(): array
-    {
-        $roles = parent::getRoles();
-        $roles[] = 'ROLE_SUPER_ADMIN';
-
-        return $roles;
-    }
 }
