@@ -1,0 +1,38 @@
+{% extends '@SonataAdmin/CRUD/base_show.html.twig' %}
+
+{% block show_groups %}
+    <div class="js-comment-wrapper">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block field_row %}
+    {{  parent() }}
+    <div class="col-md-9 js-comment-form-div" data-url="{{ path('admin_app_comment_create') }}">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/CommentApp.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            var $divFormData = $('.js-comment-form-div');
+            var creationUrl = $divFormData.data('url');
+            $.ajax({
+                url: creationUrl,
+                method: 'POST',
+                success: function(data) {
+                    $('.js-comment-form-div').html(data);
+                }
+            })
+
+            var $commentTable = $('.js-comment-wrapper');
+            CommentApp.initialize($commentTable);
+        });
+
+    </script>
+{% endblock %}

@@ -28,6 +28,7 @@ final class BookAdmin extends AbstractAdmin
         if ($user === null) {
             throw new LogicException('Create at least one user');
         }
+
         return Book::create(
             title: '',
             user: $user,
@@ -116,11 +117,10 @@ final class BookAdmin extends AbstractAdmin
                 ->add('createdAt')
                 ->add('readAt')
                 ->add('score.value')
+                ->add('comments', null, [
+                    'template' => '/admin/book/comment.html.twig'
+                ])
             ->end()
-            /*->with('Comentarios', ['class' => 'col-md-9'])
-                ->add('comments', FieldDescriptionInterface::TYPE_TEXTAREA, [
-                    'editable' => true
-                ])*/
-            ->end();
+            ;
     }
 }

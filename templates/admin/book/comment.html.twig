@@ -1,0 +1,43 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block name %}
+{% endblock %}
+
+{% block field %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Comentario</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for comment in object.comments %}
+                        <td>{{ comment.getUser.getUsername }}</td>
+                        <td>{{ comment.getComment }}</td>
+                        <td><a href="{{ path('admin_app_comment_edit', {id: comment.getId}) }}"
+                               class="btn btn-sm btn-default edit-link"
+                               title="{{ 'action_edit'|trans({}, 'SonataAdminBUndle') }}">
+                                <i class="fas fa-pencil-alt" aria-hidden="true" ></i>
+                                <span class="sr-only">
+                            {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
+                        </span>
+                            </a>
+                            <a href="#" data-url="{{ path('admin_app_comment_delete', {id: comment.getId}) }}"
+                               class="btn btn-sm btn-default js-delete-comment"
+                               title="{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}" >
+                                <i class="fas fa-times" aria-hidden="true"></i>
+                                <span class="sr-only">
+                            {{ 'action_delte'|trans({}, 'SonataAdminBundle') }}
+                        </span>
+                            </a>
+                        </td>
+                    {% else %}
+                        <td colspan="3">No hay comentarios</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+{% endblock %}

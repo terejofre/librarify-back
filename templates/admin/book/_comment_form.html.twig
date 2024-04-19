@@ -1,0 +1,15 @@
+{{ form_start(form, {
+    method: 'POST',
+    action: path('comment_new')
+    'class': 'form-inline',
+    'novalidate': 'novalidate'
+    })
+}}
+
+{{ form_row(form.item, {
+    'label' => 'Comentario',
+}) }}
+
+{{ form_row(form.reps, {
+
+}) }}

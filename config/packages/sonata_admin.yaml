@@ -11,6 +11,9 @@ sonata_admin:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
         groups:
+            members:
+                label: Libros
+                icon: <i class='fa 'fa-document'></i>
             admin:
                 label: Administrador
                 icon: <i class='fa fa-pencil'></i>

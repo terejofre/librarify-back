@@ -34,7 +34,9 @@ services:
         public: true
         calls:
             - [setUserRepository, ['@App\Repository\UserRepository']]
-            - [setTemplate, ['show', '/admin/book/show.html.twig']]
+            - [setTemplate, ['show', '/admin/book/show_new.html.twig']]
+            #- [setTemplate, ['show', '/admin/book/show.html.twig']]
+            #- [addChild, ['@App\Admin\CommentAdmin', 'book']]
 
     admin.author:
         class: App\Admin\AuthorAdmin
@@ -81,3 +83,11 @@ services:
     App\Service\Book\ExportInCsv:
         arguments:
             $projectFolder: '%kernel.project_dir%'
+
+    admin.comment:
+        class: App\Admin\CommentAdmin
+        arguments: ['@service_container', 'admin.comment', App\Entity\Comment, 'sonata.admin.controller.crud']
+        #arguments: [ ~, App\Entity\Comment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Comment }
+        public: true

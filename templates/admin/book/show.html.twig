@@ -1,29 +1,13 @@
 {% extends '@SonataAdmin/CRUD/base_show.html.twig' %}
 
-
 {% block field_row %}
     {{  parent() }}
     <div class="col-md-9">
         <div class="box box-primary">
-            <div class="box-header">
-                <h4 class="box-title">
-                    Comentarios
-                </h4>
-            </div>
-            <div class="box-body no-padding table-responsive">
-                <table class="table">
-                    <tbody>
-                    {% for comment in object.comments %}
-                        <tr class="sonata-ba-view-container">
-                            <th>comment.user.name</th>
-                            <td>comment.comment</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+            <div class="box-body no-padding table-responsive js-comment-div">
                 <div class="sonata-ba-collapsed-fields">
                     <div class="form-group">
-                        <form action="{{ path('app_api_books_patch', {id: object.id}) }}" id="comment-form">
+                        <form data-url="{{ path('app_api_books_patch', {id: object.id}) }}" class="js-comment-form">
                             <label for="" class="control-label">
                                 Comentario
                             </label>
@@ -32,7 +16,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <input type="button" class="btn btn-primary btn-publish" style="margin-left: 15px;" value="Publicar">
+                                <button type="submit" class="btn btn-primary js-btn-publish">
+                                    <span class="fa js-loading-span"></span>
+                                    <span> Publicar </span>
+                                </button>
                             </div>
                         </form>
                     </div>

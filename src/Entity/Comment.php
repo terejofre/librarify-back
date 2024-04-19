@@ -12,16 +12,16 @@ class Comment
     public function __construct(
         private UuidInterface $id,
         private string $comment,
-        private Book $book,
-        private User $user
+        private ?User $user = null,
+        private ?Book $book = null
     )
     {
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    public static function create(string $comment, Book $book, User $user): self
+    public static function create(string $comment, ?User $user = null, ?Book $book = null): self
     {
-        return new self(Uuid::uuid4(), $comment, $book, $user);
+        return new self(Uuid::uuid4(), $comment, $user, $book);
     }
 
     /**
@@ -40,7 +40,7 @@ class Comment
         return $this->comment;
     }
 
-    public function getBook(): Book
+    public function getBook(): ?Book
     {
         return $this->book;
     }
@@ -75,5 +75,18 @@ class Comment
     public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment(string $comment): void
+    {
+        $this->comment = $comment;
+    }
+
+    public function __toString(): string
+    {
+        return $this->comment ?? 'Comentario';
     }
 }
