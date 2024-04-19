@@ -9,6 +9,9 @@ use Sonata\UserBundle\Entity\BaseUser;
 
 class User extends BaseUser
 {
+    public const ROLE_DEFAULT = 'ROLE_MEMBER';
+    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+
     protected $id;
 
     public function __construct(

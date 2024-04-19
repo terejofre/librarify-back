@@ -5,17 +5,13 @@ sonata_admin:
 
     security:
         handler: sonata.admin.security.handler.role
-        role_admin: PUBLIC_ACCESS
 
     dashboard:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
         groups:
-            members:
-                label: Libros
-                icon: <i class='fa 'fa-document'></i>
             admin:
-                label: Administrador
+                label: Objetos
                 icon: <i class='fa fa-pencil'></i>
             cache:
                 label: Herramientas

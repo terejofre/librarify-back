@@ -8,11 +8,54 @@ security:
         ROLE_ADMIN:
             - ROLE_ADMIN
             - ROLE_SUPER_ADMIN
-
-        ROLE_MEMBER:
             - ROLE_ADMIN_AUTHOR_ALL
             - ROLE_ADMIN_CATEGORY_ALL
+            - ROLE_ADMIN_CATEGORY_EDIT
+            - ROLE_ADMIN_CATEGORY_LIST
+            - ROLE_ADMIN_CATEGORY_CREATE
+            - ROLE_ADMIN_CATEGORY_VIEW
+            - ROLE_ADMIN_CATEGORY_DELETE
+            - ROLE_ADMIN_CATEGORY_EXPORT
             - ROLE_ADMIN_BOOK_ALL
+            - ROLE_ADMIN_BOOK_EDIT
+            - ROLE_ADMIN_BOOK_LIST
+            - ROLE_ADMIN_BOOK_CREATE
+            - ROLE_ADMIN_BOOK_VIEW
+            - ROLE_ADMIN_BOOK_DELETE
+            - ROLE_ADMIN_BOOK_EXPORT
+            - ROLE_ADMIN_AUTHOR_ALL
+            - ROLE_ADMIN_AUTHOR_EDIT
+            - ROLE_ADMIN_AUTHOR_LIST
+            - ROLE_ADMIN_AUTHOR_CREATE
+            - ROLE_ADMIN_AUTHOR_VIEW
+            - ROLE_ADMIN_AUTHOR_DELETE
+            - ROLE_ADMIN_AUTHOR_EXPORT
+            - ROLE_SONATA_USER_ADMIN_USER_EDIT
+            - ROLE_SONATA_USER_ADMIN_USER_LIST
+            - ROLE_SONATA_USER_ADMIN_USER_CREATE
+            - ROLE_SONATA_USER_ADMIN_USER_VIEW
+            - ROLE_SONATA_USER_ADMIN_USER_DELETE
+            - ROLE_SONATA_USER_ADMIN_USER_EXPORT
+            - ROLE_SONATA_USER_ADMIN_USER_ALL
+            - ROLE_ADMIN_COMMENT_ALL
+            - ROLE_ADMIN_COMMENT_EDIT
+            - ROLE_ADMIN_COMMENT_CREATE
+            - ROLE_ADMIN_COMMENT_LIST
+            - ROLE_ADMIN_COMMENT_VIEW
+            - ROLE_ADMIN_COMMENT_DELETE
+            - ROLE_ADMIN_COMMENT_EXPORT
+
+        ROLE_MEMBER:
+            - ROLE_ADMIN_BOOK_VIEW
+            - ROLE_ADMIN_BOOK_CREATE
+            - ROLE_ADMIN_BOOK_EDIT
+            - ROLE_ADMIN_BOOK_LIST
+            - ROLE_ADMIN_AUTHOR_VIEW
+            - ROLE_ADMIN_COMMENT_CREATE
+            - ROLE_ADMIN_COMMENT_LIST
+            - ROLE_ADMIN_COMMENT_VIEW
+            - ROLE_ADMIN_COMMENT_EDIT
+            - ROLE_ADMIN_CATEGORY_VIEW
 
 
     password_hashers:
@@ -91,6 +134,5 @@ security:
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        - { path: ^/admin/author, role: [PUBLIC_ACCESS] }
         - { path: ^/admin, role: [PUBLIC_ACCESS] }
         - { path: ^/.*, role: PUBLIC_ACCESS }

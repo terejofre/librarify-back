@@ -17,23 +17,26 @@
                     <tr>
                         <td>{{ comment.getUser.getUsername }}</td>
                         <td>{{ comment.getComment }}</td>
-                        <td><a href="{{ path('admin_app_comment_edit', {id: comment.getId}) }}"
-                               class="btn btn-sm btn-default edit-link"
-                               title="{{ 'action_edit'|trans({}, 'SonataAdminBUndle') }}">
-                                <i class="fas fa-pencil-alt" aria-hidden="true" ></i>
-                                <span class="sr-only">
-                            {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
-                        </span>
-                            </a>
-                            <a href="#" data-url="{{ path('admin_app_comment_delete', {id: comment.getId}) }}"
-                               class="btn btn-sm btn-default js-delete-comment"
-                               title="{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}" >
-                                <i class="fas fa-times" aria-hidden="true"></i>
-                                <span class="sr-only">
-                            {{ 'action_delte'|trans({}, 'SonataAdminBundle') }}
-                        </span>
-                            </a>
-                        </td>
+                        <td>
+                        {% if app.user.id == comment.getUser.getId %}
+                            <a href="{{ path('admin_app_comment_edit', {id: comment.getId}) }}"
+                                   class="btn btn-sm btn-default edit-link"
+                                   title="{{ 'action_edit'|trans({}, 'SonataAdminBUndle') }}">
+                                    <i class="fas fa-pencil-alt" aria-hidden="true" ></i>
+                                    <span class="sr-only">
+                                {{ 'action_edit'|trans({}, 'SonataAdminBundle') }}
+                            </span>
+                                </a>
+                                <a href="#" data-url="{{ path('admin_app_comment_delete', {id: comment.getId}) }}"
+                                   class="btn btn-sm btn-default js-delete-comment"
+                                   title="{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}" >
+                                    <i class="fas fa-times" aria-hidden="true"></i>
+                                    <span class="sr-only">
+                                {{ 'action_delte'|trans({}, 'SonataAdminBundle') }}
+                            </span>
+                                </a>
+                        {% endif %}
+                            </td>
                     {% else %}
                         <td colspan="3">No hay comentarios</td>
                     </tr>
