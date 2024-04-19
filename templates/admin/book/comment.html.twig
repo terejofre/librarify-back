@@ -13,8 +13,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    {% for comment in object.comments %}
+                {% for comment in object.comments %}
+                    <tr>
                         <td>{{ comment.getUser.getUsername }}</td>
                         <td>{{ comment.getComment }}</td>
                         <td><a href="{{ path('admin_app_comment_edit', {id: comment.getId}) }}"
@@ -36,8 +36,8 @@
                         </td>
                     {% else %}
                         <td colspan="3">No hay comentarios</td>
-                    {% endfor %}
-                </tr>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
 {% endblock %}

@@ -85,5 +85,6 @@ App\Entity\Book:
         comments:
             targetEntity: App\Entity\Comment
             mappedBy: book
+            orderBy: { createdAt: ASC }
 
     lifecycleCallbacks: {  }

@@ -20,6 +20,7 @@
     <script>
 
         $(document).ready(function() {
+
             var $divFormData = $('.js-comment-form-div');
             var creationUrl = $divFormData.data('url');
             $.ajax({
@@ -32,6 +33,12 @@
 
             var $commentTable = $('.js-comment-wrapper');
             CommentApp.initialize($commentTable);
+
+            $('.js-comment-wrapper').find('form:last').on('submit', function(e) {
+                e.preventDefault();
+                console.log('alto!');
+            })
+
         });
 
     </script>
