@@ -12,7 +12,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelHiddenType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 final class CommentAdmin extends AbstractAdmin
 {
@@ -60,7 +59,9 @@ final class CommentAdmin extends AbstractAdmin
     {
         $form
             ->add('comment')
-            ->add('book', ModelHiddenType::class)
+            ->add('book', ModelHiddenType::class, [
+                'attr' => ['data-input-name' => 'js-book-id']
+            ])
         ;
     }
 

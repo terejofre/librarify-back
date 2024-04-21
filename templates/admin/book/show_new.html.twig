@@ -28,16 +28,12 @@
                 method: 'POST',
                 success: function(data) {
                     $('.js-comment-form-div').html(data);
+                    $('[data-input-name="js-book-id"]').attr('value','{{ object.id }}')
                 }
             })
 
             var $commentTable = $('.js-comment-wrapper');
             CommentApp.initialize($commentTable);
-
-            $('.js-comment-wrapper').find('form:last').on('submit', function(e) {
-                e.preventDefault();
-                console.log('alto!');
-            })
 
         });
 
